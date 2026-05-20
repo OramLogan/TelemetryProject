@@ -4,7 +4,7 @@
 
 namespace telementary
 {
-    TelemetryAnalyzer::TelemetryAnalyzer(const TelementaryStore& store)
+    TelemetryAnalyzer::TelemetryAnalyzer(const ITelemetryStore& store)
     : _store(store)
     {}
 
@@ -18,7 +18,7 @@ namespace telementary
         }
 
         double avg_temperature = 0;
-        const auto& copy = _store.getAll();
+        auto copy = _store.getAll();
 
         for(const auto& msg : copy)
         {
@@ -39,7 +39,7 @@ namespace telementary
         }
 
         double min_temperature = std::numeric_limits<double>::max();;
-        const auto& copy = _store.getAll();
+        auto copy = _store.getAll();
 
         for(const auto& msg : copy)
         {
@@ -60,7 +60,7 @@ namespace telementary
         }
 
         double max_temperature = std::numeric_limits<double>::lowest();;
-        const auto& copy = _store.getAll();
+        auto copy = _store.getAll();
 
         for(const auto& msg : copy)
         {
@@ -78,7 +78,7 @@ namespace telementary
             throw std::invalid_argument("No Messages Found");
         }
 
-        const auto& copy = _store.getAll();
+        auto copy = _store.getAll();
         std::vector<TelemetryMessage> message_by_satId;
 
         for(const auto& msg : copy)
@@ -100,7 +100,7 @@ namespace telementary
             throw std::invalid_argument("No Messages Found");
         }
 
-        const auto& copy = _store.getAll();
+        auto copy = _store.getAll();
         std::vector<TelemetryMessage> anomalies;
 
         for(const auto& msg : copy)

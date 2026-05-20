@@ -8,7 +8,7 @@
 
 namespace telementary
 {
-    class InMemoryTelemetryStore : ITelemetryStore
+    class InMemoryTelemetryStore : public ITelemetryStore
     {
         private:
             std::vector<TelemetryMessage> msg_store;

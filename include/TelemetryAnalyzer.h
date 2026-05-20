@@ -1,7 +1,7 @@
 #ifndef TELEMETRYANALYZER_H
 #define TELEMETRYANALYZER_H
 
-#include"TelementaryStore.h"
+#include"ITelemetryStore.h"
 
 #include<vector>
 #include<string>
@@ -11,10 +11,10 @@ namespace telementary
     class TelemetryAnalyzer
     {
         private:
-            const TelementaryStore& _store;
+            const ITelemetryStore& _store;
 
         public:
-          explicit TelemetryAnalyzer(const TelementaryStore& store);
+          explicit TelemetryAnalyzer(const ITelemetryStore& store);
 
           double averageTemperature() const;
           double minTemperature() const;

@@ -1,5 +1,5 @@
 #include"TelemetryMessage.h"
-#include"TelementaryStore.h"
+#include"InMemoryTelemetryStore.h"
 #include"TelemetryAnalyzer.h"
 #include"TelemetryQueue.h"
 #include"TelemetryProcessor.h"

@@ -14,7 +14,7 @@ namespace telementary
                 invalidCountPromises.emplace_back();
                 invlaidCountFutures.push_back(invalidCountPromises.back().get_future());
 
-                processors.emplace_back(queue, store, logger, invalidCountPromises.back());
+                processors.emplace_back(queue, memoryStore, logger, invalidCountPromises.back()); //add in database
             }
 
             producers.reserve(numProducers);
@@ -66,9 +66,9 @@ namespace telementary
         }
     }
 
-    const TelementaryStore& TelemetryPipeline::getStore() const
+    const InMemoryTelemetryStore& TelemetryPipeline::getStore() const        //make one for db
     {
-        return store;
+        return memoryStore;
     }
 
     int TelemetryPipeline::getTotalInvalidMessages()

@@ -26,7 +26,7 @@ namespace telementary
         CROW_ROUTE(app, "/telemetry/count")([this]()
         {
             crow::json::wvalue response;
-            response["count"] = pipeline.getStore().size();
+            response["count"] = pipeline.getStore().size();     //db route
             return crow::response(200, response);
         });
 
