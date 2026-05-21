@@ -12,7 +12,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # Library target
 add_library(telemetry_lib
     src/TelemetryMessage.cpp
-    src/TelementaryStore.cpp
+    src/InMemoryTelemetryStore.cpp
     src/TelemetryAnalyzer.cpp
     src/TelemetryQueue.cpp
     src/TelemetryProducer.cpp
@@ -70,6 +70,12 @@ FetchContent_MakeAvailable(Crow)
 #crow
 target_link_libraries(telemetry_app PRIVATE Crow::Crow)
 target_link_libraries(telemetry_lib PRIVATE Crow::Crow)
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(PQXX REQUIRED libpqxx)
+
+target_include_directories(telemetry_lib PRIVATE ${PQXX_INCLUDE_DIRS})
+target_link_libraries(telemetry_lib PRIVATE ${PQXX_LIBRARIES})
 
 enable_testing()
 
