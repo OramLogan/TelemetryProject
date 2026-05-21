@@ -13,6 +13,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_library(telemetry_lib
     src/TelemetryMessage.cpp
     src/InMemoryTelemetryStore.cpp
+    src/TelemetryDatabaseStore.cpp
     src/TelemetryAnalyzer.cpp
     src/TelemetryQueue.cpp
     src/TelemetryProducer.cpp

@@ -22,7 +22,7 @@ int main()
     telementary::TelemetryPipeline pipeline(4, 2, 4000);
     pipeline.start();
 
-    telementary::TelemetryAnalyzer analyzer(pipeline.getStore());
+    telementary::TelemetryAnalyzer analyzer(pipeline.getInMemoryStore());
     telementary::TelemetryReportGenerator generator(analyzer);
 
     crow::SimpleApp app;

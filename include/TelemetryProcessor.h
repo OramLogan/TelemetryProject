@@ -1,7 +1,7 @@
 #ifndef TELEMETRYPROCESSOR_H
 #define TELEMETRYPROCESSOR_H
 
-#include"InMemoryTelemetryStore.h"
+#include"ITelemetryStore.h"
 #include"TelemetryQueue.h"
 #include"TelemetryLogger.h"
 #include<future>
@@ -12,14 +12,14 @@ namespace telementary
     {
         private:
             TelemetryQueue& queue;
-            InMemoryTelemetryStore& memoryStore;
-            //DatabaseTelemetryStore databaseStore;
+            ITelemetryStore& memoryStore;
+            ITelemetryStore& databaseStore;
             TelemetryLogger& logger;
             std::promise<int>& invalidCountPromise;
 
         
         public:
-            TelemetryProcessor(TelemetryQueue& queue, InMemoryTelemetryStore& store, TelemetryLogger& logger, std::promise<int>& invalidCountPromise);
+            TelemetryProcessor(TelemetryQueue& queue, ITelemetryStore& store, ITelemetryStore& dbStore, TelemetryLogger& logger, std::promise<int>& invalidCountPromise);
             void run();
     };
 }

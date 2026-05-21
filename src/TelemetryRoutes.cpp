@@ -23,10 +23,17 @@ namespace telementary
 
     void TelemetryRoutes::registerTelemetryRoutes()
     {
-        CROW_ROUTE(app, "/telemetry/count")([this]()
+        CROW_ROUTE(app, "/telemetry/cache-count")([this]()
         {
             crow::json::wvalue response;
-            response["count"] = pipeline.getStore().size();     //db route
+            response["cache_count"] = pipeline.getInMemoryStore().size();
+            return crow::response(200, response);
+        });
+
+        CROW_ROUTE(app, "/telemetry/db-count")([this]()
+        {
+            crow::json::wvalue response;
+            response["db_count"] = pipeline.getDatabaseStore().size();
             return crow::response(200, response);
         });
 
@@ -125,7 +132,7 @@ namespace telementary
                 auto report = generator.analysisReport();
 
                 crow::json::wvalue response;
-                response["count"] = pipeline.getStore().size();
+                response["count"] = pipeline.getInMemoryStore().size();
                 response["average_temperature"] = report.avgTemperature;
                 response["min_temperature"] = report.minTemperature;
                 response["max_temperature"] = report.maxTemperature;

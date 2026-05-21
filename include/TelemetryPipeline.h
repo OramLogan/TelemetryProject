@@ -3,6 +3,7 @@
 
 #include"TelemetryQueue.h"
 #include"InMemoryTelemetryStore.h"
+#include"TelemetryDatabaseStore.h"
 #include"TelemetryProcessor.h"
 #include"TelemetryProducer.h"
 #include"TelemetryLogger.h"
@@ -15,7 +16,7 @@ namespace telementary
         private:
             TelemetryQueue queue;
             InMemoryTelemetryStore memoryStore;
-            //DatabaseTelemetryStore databaseStore;
+            TelemetryDatabaseStore databaseStore;
             TelemetryLogger logger;
 
             int numProducers;
@@ -36,7 +37,8 @@ namespace telementary
             void start();
             void wait();
             void stop();
-            const InMemoryTelemetryStore& getStore() const;
+            const InMemoryTelemetryStore& getInMemoryStore() const;
+            const TelemetryDatabaseStore& getDatabaseStore() const;
             void submitMessage(const TelemetryMessage& msg);
             int getTotalInvalidMessages();
             void makeLog(const std::string& error_msg, const TelemetryMessage& msg);
