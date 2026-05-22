@@ -32,9 +32,16 @@ namespace telementary
 
         CROW_ROUTE(app, "/telemetry/db-count")([this]()
         {
-            crow::json::wvalue response;
-            response["db_count"] = pipeline.getDatabaseStore().size();
-            return crow::response(200, response);
+            try
+            {
+                crow::json::wvalue response;
+                response["db_count"] = pipeline.getDatabaseStore().size();
+                return crow::response(200, response);
+            }
+            catch (const std::exception& e)
+            {
+                return crow::response(500, e.what());
+            }
         });
 
         CROW_ROUTE(app, "/telemetry/message").methods(crow::HTTPMethod::Post)([this](const crow::request& req)

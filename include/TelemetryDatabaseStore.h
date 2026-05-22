@@ -5,6 +5,7 @@
 #include<string>
 #include<vector>
 #include<pqxx/pqxx>
+#include<mutex>
 
 
 namespace telementary
@@ -14,6 +15,7 @@ namespace telementary
         private:
             void createTable();
             mutable pqxx::connection conn;
+            mutable std::mutex _mutex;
 
         public:
             explicit TelemetryDatabaseStore(const std::string& connectionString);

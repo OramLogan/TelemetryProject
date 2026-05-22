@@ -1,6 +1,7 @@
 services:
   telemetry-api:
     build: .
+    container_name: telemetry-api
     ports:
       - "8080:8080"
     depends_on:
@@ -14,12 +15,13 @@ services:
 
   postgres:
     image: postgres:16
+    container_name: telemetry-postgres
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_DB: telemetry_db
       POSTGRES_USER: telemetry_user
       POSTGRES_PASSWORD: telemetry_password
-    ports:
-      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

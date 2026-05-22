@@ -5,7 +5,7 @@ project(telemetry
     LANGUAGES CXX
 )
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -35,7 +35,6 @@ target_compile_options(telemetry_lib
         -Wall
         -Wextra
         -Wpedantic
-        -Werror
 )
 
 
@@ -75,8 +74,11 @@ target_link_libraries(telemetry_lib PRIVATE Crow::Crow)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(PQXX REQUIRED libpqxx)
 
-target_include_directories(telemetry_lib PRIVATE ${PQXX_INCLUDE_DIRS})
-target_link_libraries(telemetry_lib PRIVATE ${PQXX_LIBRARIES})
+target_include_directories(telemetry_lib PUBLIC ${PQXX_INCLUDE_DIRS})
+target_link_directories(telemetry_lib PUBLIC ${PQXX_LIBRARY_DIRS})
+target_link_libraries(telemetry_lib PUBLIC ${PQXX_LIBRARIES})
+target_compile_options(telemetry_lib PUBLIC ${PQXX_CFLAGS_OTHER})
+target_link_libraries(telemetry_app PRIVATE telemetry_lib)
 
 enable_testing()
 

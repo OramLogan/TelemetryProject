@@ -14,6 +14,7 @@ namespace telementary
 
     void TelemetryDatabaseStore::createTable()
     {
+        std::lock_guard<std::mutex> lock(_mutex);
         pqxx::work txn(conn);
 
         txn.exec(
@@ -30,16 +31,18 @@ namespace telementary
 
     void TelemetryDatabaseStore::addMessage(const TelemetryMessage& msg)
     {
+        std::lock_guard<std::mutex> lock(_mutex);
         pqxx::work txn(conn);
 
         if(msg.isValid())
         {
-            txn.exec_params(
-                "INSERT INTO telemetry (satellite_id, timestamp, temperature) "
-                "VALUES ($1, $2, $3)",
-                msg.getSatelliteId(),
-                msg.getTimeStamp(),
-                msg.getTemperature()
+            txn.exec(
+                "INSERT INTO telemetry (satellite_id, timestamp, temperature) VALUES ($1, $2, $3)",
+                pqxx::params{
+                    msg.getSatelliteId(),
+                    msg.getTimeStamp(),
+                    msg.getTemperature()
+                }
             );
             txn.commit();
         }
@@ -51,11 +54,12 @@ namespace telementary
 
     std::vector<TelemetryMessage> TelemetryDatabaseStore::getAll() const
     {
+        std::lock_guard<std::mutex> lock(_mutex);
         pqxx::work txn(conn);
 
         pqxx::result result = txn.exec(
-            "SELECT satellite_id, timestamp, temperature,"
-            "FROM telemetry,"
+            "SELECT satellite_id, timestamp, temperature"
+            "FROM telemetry"
             "ORDER BY id ASC"
         );
 
@@ -76,10 +80,11 @@ namespace telementary
 
     std::size_t TelemetryDatabaseStore::size() const
     {
+        std::lock_guard<std::mutex> lock(_mutex);
         pqxx::work txn(conn);
 
         pqxx::result result = txn.exec(
-            "SELECT COUNT(id),"
+            "SELECT COUNT(id)"
             "FROM telemetry"
         );
 
