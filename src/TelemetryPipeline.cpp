@@ -4,7 +4,7 @@ namespace telementary
 {
     TelemetryPipeline::TelemetryPipeline(int num_producer, int num_processors, int num_messages)
         : databaseStore(
-            "host=localhost "
+            "host=postgres "
             "port=5432 "
             "dbname=telemetry_db "
             "user=telemetry_user "

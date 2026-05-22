@@ -36,13 +36,19 @@ namespace telementary
 
         if(msg.isValid())
         {
-            txn.exec(
+            // txn.exec(
+            //     "INSERT INTO telemetry (satellite_id, timestamp, temperature) VALUES ($1, $2, $3)",
+            //     pqxx::params{
+            //         msg.getSatelliteId(),
+            //         msg.getTimeStamp(),
+            //         msg.getTemperature()
+            //     }
+            // );
+            txn.exec_params(
                 "INSERT INTO telemetry (satellite_id, timestamp, temperature) VALUES ($1, $2, $3)",
-                pqxx::params{
-                    msg.getSatelliteId(),
-                    msg.getTimeStamp(),
-                    msg.getTemperature()
-                }
+                msg.getSatelliteId(),
+                msg.getTimeStamp(),
+                msg.getTemperature()
             );
             txn.commit();
         }
