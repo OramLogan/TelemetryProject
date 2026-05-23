@@ -14,6 +14,7 @@ add_library(telemetry_lib
     src/TelemetryMessage.cpp
     src/InMemoryTelemetryStore.cpp
     src/TelemetryDatabaseStore.cpp
+    src/DatabaseConnectionPool.cpp
     src/TelemetryAnalyzer.cpp
     src/TelemetryQueue.cpp
     src/TelemetryProducer.cpp

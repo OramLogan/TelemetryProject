@@ -2,6 +2,7 @@
 #define TELEMETRYDATABASESTORE_H
 
 #include"ITelemetryStore.h"
+#include"DatabaseConnectionPool.h"
 #include<string>
 #include<vector>
 #include<pqxx/pqxx>
@@ -14,7 +15,8 @@ namespace telementary
     {
         private:
             void createTable();
-            mutable pqxx::connection conn;
+            mutable DatabaseConnectionPool connection;
+            static constexpr std::size_t POOL_SIZE = 3;
             mutable std::mutex _mutex;
 
         public:
