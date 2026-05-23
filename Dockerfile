@@ -7,6 +7,8 @@ RUN apt-get update && apt-get install -y \
     git \
     python3 \
     libasio-dev \
+    pkg-config \
+    libpqxx-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app

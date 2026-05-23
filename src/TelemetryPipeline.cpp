@@ -3,7 +3,12 @@
 namespace telementary
 {
     TelemetryPipeline::TelemetryPipeline(int num_producer, int num_processors, int num_messages)
-        : numProducers(num_producer), numProcessors(num_processors), numMessages(num_messages)
+        : databaseStore(
+            "host=postgres "
+            "port=5432 "
+            "dbname=telemetry_db "
+            "user=telemetry_user "
+            "password=telemetry_password"), numProducers(num_producer), numProcessors(num_processors), numMessages(num_messages)
         {
             invalidCountPromises.reserve(numProcessors);
             invlaidCountFutures.reserve(numProcessors);
@@ -14,7 +19,7 @@ namespace telementary
                 invalidCountPromises.emplace_back();
                 invlaidCountFutures.push_back(invalidCountPromises.back().get_future());
 
-                processors.emplace_back(queue, store, logger, invalidCountPromises.back());
+                processors.emplace_back(queue, memoryStore, databaseStore, logger, invalidCountPromises.back());
             }
 
             producers.reserve(numProducers);
@@ -66,9 +71,14 @@ namespace telementary
         }
     }
 
-    const TelementaryStore& TelemetryPipeline::getStore() const
+    const InMemoryTelemetryStore& TelemetryPipeline::getInMemoryStore() const     
     {
-        return store;
+        return memoryStore;
+    }
+
+    const TelemetryDatabaseStore& TelemetryPipeline::getDatabaseStore() const       
+    {
+        return databaseStore;
     }
 
     int TelemetryPipeline::getTotalInvalidMessages()

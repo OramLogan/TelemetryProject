@@ -1,9 +1,10 @@
-#include"TelementaryStore.h"
+#include"InMemoryTelemetryStore.h"
 #include<stdexcept>
+
 
 namespace telementary
 {
-    void TelementaryStore::addMessage(const TelemetryMessage& msg)
+    void InMemoryTelemetryStore::addMessage(const TelemetryMessage& msg)
     {
         std::lock_guard<std::mutex> lock(_mutex);
 
@@ -17,13 +18,13 @@ namespace telementary
         }
     }
 
-    const std::vector<TelemetryMessage>& TelementaryStore::getAll() const
+    std::vector<TelemetryMessage> InMemoryTelemetryStore::getAll() const
     {
         std::lock_guard<std::mutex> lock(_mutex);
         return msg_store;
     }
 
-    std::size_t TelementaryStore::size() const
+    std::size_t InMemoryTelemetryStore::size() const
     {
         std::lock_guard<std::mutex> lock(_mutex);
         return msg_store.size();

@@ -4,8 +4,8 @@
 
 namespace telementary
 {
-    TelemetryProcessor::TelemetryProcessor(TelemetryQueue& queue, TelementaryStore& store, TelemetryLogger& logger, std::promise<int>& invalidCountPromise)
-        : queue(queue), store(store), logger(logger), invalidCountPromise(invalidCountPromise) {}
+    TelemetryProcessor::TelemetryProcessor(TelemetryQueue& queue, ITelemetryStore& store, ITelemetryStore& dbStore, TelemetryLogger& logger, std::promise<int>& invalidCountPromise)
+        : queue(queue), memoryStore(store), databaseStore(dbStore), logger(logger), invalidCountPromise(invalidCountPromise) {}
     
     void TelemetryProcessor::run()
     {
@@ -20,7 +20,8 @@ namespace telementary
 
             try
             {
-                store.addMessage(msg);
+                databaseStore.addMessage(msg);
+                memoryStore.addMessage(msg);
             }
             catch(const std::exception& e)
             {
