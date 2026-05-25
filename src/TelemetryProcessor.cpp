@@ -4,8 +4,8 @@
 
 namespace telementary
 {
-    TelemetryProcessor::TelemetryProcessor(TelemetryQueue& queue, ITelemetryStore& store, ITelemetryStore& dbStore, TelemetryLogger& logger, std::promise<int>& invalidCountPromise)
-        : queue(queue), memoryStore(store), databaseStore(dbStore), logger(logger), invalidCountPromise(invalidCountPromise) {}
+    TelemetryProcessor::TelemetryProcessor(TelemetryQueue& queue, ITelemetryStore& store, ITelemetryStore& dbStore, TelemetryLogger& messageLogger, TelemetryLogger& dbLogger, std::promise<int>& invalidCountPromise)
+        : queue(queue), memoryStore(store), databaseStore(dbStore), messageLogger(messageLogger), dbLogger(dbLogger), invalidCountPromise(invalidCountPromise) {}
     
     void TelemetryProcessor::run()
     {
@@ -25,7 +25,7 @@ namespace telementary
             catch(const std::exception& e)
             {
                 invalidCount++;
-                logger.logError(std::string("Database insert failed"), msg);
+                dbLogger.logError(std::string("Database insert failed"), msg);
             }
 
             try
@@ -34,7 +34,7 @@ namespace telementary
             }
             catch(const std::exception& e)
             {
-                logger.logError(std::string("Cache memory insert failed"), msg);
+                messageLogger.logError(std::string("Cache memory insert failed"), msg);
             }
             
         }

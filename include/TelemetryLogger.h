@@ -14,9 +14,10 @@ namespace telementary
         private:
             std::ofstream logFile;
             std::mutex logMutex;
+            std::string filepath;
 
         public:
-            TelemetryLogger();
+            explicit TelemetryLogger(const std::string& filepath);
             void logError(const std::string& msg);
             void logError(const std::string& error_msg, const TelemetryMessage& msg);
             std::string readError();

@@ -17,7 +17,8 @@ namespace telementary
             TelemetryQueue queue;
             InMemoryTelemetryStore memoryStore;
             TelemetryDatabaseStore databaseStore;
-            TelemetryLogger logger;
+            TelemetryLogger messageLogger;
+            TelemetryLogger dbLogger;
 
             int numProducers;
             int numProcessors;
@@ -43,7 +44,8 @@ namespace telementary
             int getTotalInvalidMessages();
             void makeLog(const std::string& error_msg, const TelemetryMessage& msg);
             void makeLog(const std::string& error_msg);
-            std::string readLog();
+            std::string readMessageLog();
+            std::string readDbLog();
 
     };
 }

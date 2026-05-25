@@ -4,7 +4,7 @@
 namespace telementary
 {
     TelemetryPipeline::TelemetryPipeline(int num_producer, int num_processors, int num_messages)
-        : databaseStore(loadDBconfig().loadConfiguration()), numProducers(num_producer), numProcessors(num_processors), numMessages(num_messages)
+        : databaseStore(loadDBconfig().loadConfiguration()), messageLogger("logs/MessageErrors.log"), dbLogger("logs/DatabaseErrors.log"),numProducers(num_producer), numProcessors(num_processors), numMessages(num_messages)
         {
             invalidCountPromises.reserve(numProcessors);
             invlaidCountFutures.reserve(numProcessors);
@@ -15,7 +15,7 @@ namespace telementary
                 invalidCountPromises.emplace_back();
                 invlaidCountFutures.push_back(invalidCountPromises.back().get_future());
 
-                processors.emplace_back(queue, memoryStore, databaseStore, logger, invalidCountPromises.back());
+                processors.emplace_back(queue, memoryStore, databaseStore, messageLogger, dbLogger, invalidCountPromises.back());
             }
 
             producers.reserve(numProducers);
@@ -95,16 +95,21 @@ namespace telementary
 
     void TelemetryPipeline::makeLog(const std::string& error_msg, const TelemetryMessage& msg)
     {
-        logger.logError(error_msg, msg);
+        messageLogger.logError(error_msg, msg);
     }
 
     void TelemetryPipeline::makeLog(const std::string& error_msg)
     {
-        logger.logError(error_msg);
+        messageLogger.logError(error_msg);
     }
 
-    std::string TelemetryPipeline::readLog()
+    std::string TelemetryPipeline::readMessageLog()
     {
-        return logger.readError();
+        return messageLogger.readError();
+    }
+
+    std::string TelemetryPipeline::readDbLog()
+    {
+        return dbLogger.readError();
     }
 }
