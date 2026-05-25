@@ -37,7 +37,6 @@ namespace telementary
         logFile.flush();
 
         std::ifstream readFile(filepath);
-        std::string line;
         std::stringstream buffer;
 
         if (!readFile.is_open())
@@ -45,10 +44,7 @@ namespace telementary
             return "Could not open log file";
         }
 
-        while (std::getline(readFile, line))
-        {
-            buffer << line << "\n";
-        }
+        buffer << readFile.rdbuf();
 
         std::string result = buffer.str();
 
