@@ -4,10 +4,11 @@
 
 namespace telementary
 {
-    TelemetryLogger::TelemetryLogger()
+    TelemetryLogger::TelemetryLogger(const std::string& filepath)
+        : filepath(filepath)
     {
         std::filesystem::create_directories("logs");
-        logFile.open("logs/Error.log", std::ios::app);
+        logFile.open(filepath, std::ios::app);
     }
 
     void TelemetryLogger::logError(const std::string& msg)
@@ -35,25 +36,21 @@ namespace telementary
         std::lock_guard<std::mutex> lock(logMutex);
         logFile.flush();
 
-        std::ifstream readFile("logs/Error.log");
-        std::string line;
+        std::ifstream readFile(filepath);
         std::stringstream buffer;
 
         if (!readFile.is_open())
         {
-            return "Could not open Error.log";
+            return "Could not open log file";
         }
 
-        while (std::getline(readFile, line))
-        {
-            buffer << line << "\n";
-        }
+        buffer << readFile.rdbuf();
 
         std::string result = buffer.str();
 
         if (result.empty())
         {
-            return "Error.log is empty";
+            return "log file is empty";
         }
 
         return result;

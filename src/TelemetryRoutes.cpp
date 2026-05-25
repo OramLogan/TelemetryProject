@@ -155,9 +155,14 @@ namespace telementary
 
     void TelemetryRoutes::registerLogRoute()
     {
-        CROW_ROUTE(app, "/telemetry/error-log")([this]()
+        CROW_ROUTE(app, "/telemetry/message-log")([this]()
         {
-            return crow::response(200, pipeline.readLog());
+            return crow::response(200, pipeline.readMessageLog());
+        });
+
+        CROW_ROUTE(app, "/telemetry/db-log")([this]()
+        {
+            return crow::response(200, pipeline.readDbLog());
         });
     }
 }

@@ -29,7 +29,7 @@ namespace telementary
     {
         if(host.empty() || port.empty() || name.empty() || user.empty() || password.empty())
         {
-            throw std::invalid_argument("dbConfiguration failed");
+            throw std::invalid_argument("dbConfiguration failed :(");
         }
 
         std::string config = "host=" + host + " port=" + port + " dbname=" + name + " user=" + user + " password=" + password;

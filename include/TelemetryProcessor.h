@@ -14,12 +14,13 @@ namespace telementary
             TelemetryQueue& queue;
             ITelemetryStore& memoryStore;
             ITelemetryStore& databaseStore;
-            TelemetryLogger& logger;
+            TelemetryLogger& messageLogger;
+            TelemetryLogger& dbLogger;
             std::promise<int>& invalidCountPromise;
 
         
         public:
-            TelemetryProcessor(TelemetryQueue& queue, ITelemetryStore& store, ITelemetryStore& dbStore, TelemetryLogger& logger, std::promise<int>& invalidCountPromise);
+            TelemetryProcessor(TelemetryQueue& queue, ITelemetryStore& store, ITelemetryStore& dbStore, TelemetryLogger& messageLogger, TelemetryLogger& dbLogger, std::promise<int>& invalidCountPromise);
             void run();
     };
 }

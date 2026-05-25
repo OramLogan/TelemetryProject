@@ -7,6 +7,7 @@
 #include"TelemetryPipeline.h"
 #include"TelemetryReportGenerator.h"
 #include"TelemetryRoutes.h"
+#include"TelemetryLogger.h"
 #include<iostream>
 #include<thread>
 #include<vector>
@@ -18,23 +19,31 @@
 
 int main()
 {
-    
-    telementary::TelemetryPipeline pipeline(4, 2, 4000);
-    pipeline.start();
+    telementary::TelemetryLogger appLogger("logs/AppErrors.log");
 
-    telementary::TelemetryAnalyzer analyzer(pipeline.getInMemoryStore());
-    telementary::TelemetryReportGenerator generator(analyzer);
+    try
+    {
+        telementary::TelemetryPipeline pipeline(4, 2, 4000);
+        pipeline.start();
 
-    crow::SimpleApp app;
+        telementary::TelemetryAnalyzer analyzer(pipeline.getInMemoryStore());
+        telementary::TelemetryReportGenerator generator(analyzer);
 
-    telementary::TelemetryRoutes routes(app, pipeline, generator);
-    routes.registerRoutes();
+        crow::SimpleApp app;
 
+        telementary::TelemetryRoutes routes(app, pipeline, generator);
+        routes.registerRoutes();
 
-    app.port(8080).multithreaded().run();
+        app.port(8080).multithreaded().run();
 
-    pipeline.stop();
-    pipeline.wait();
+        pipeline.stop();
+        pipeline.wait();
+    }
+    catch(const std::exception& e)
+    {
+        appLogger.logError(std::string("Startup error --> ") + e.what());
+        return 1;
+    }
 
     return 0;
 }
