@@ -23,6 +23,7 @@ add_library(telemetry_lib
     src/TelemetryLogger.cpp
     src/TelemetryReportGenerator.cpp
     src/TelemetryRoutes.cpp
+    src/dbConfiguration.cpp
 )
 
 target_include_directories(telemetry_lib
@@ -37,6 +38,8 @@ target_compile_options(telemetry_lib
         -Wextra
         -Wpedantic
 )
+
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
 
 # Executable target

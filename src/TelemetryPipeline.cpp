@@ -1,14 +1,10 @@
 #include"TelemetryPipeline.h"
+#include"dbConfiguration.h"
 
 namespace telementary
 {
     TelemetryPipeline::TelemetryPipeline(int num_producer, int num_processors, int num_messages)
-        : databaseStore(
-            "host=postgres "
-            "port=5432 "
-            "dbname=telemetry_db "
-            "user=telemetry_user "
-            "password=telemetry_password"), numProducers(num_producer), numProcessors(num_processors), numMessages(num_messages)
+        : databaseStore(loadDBconfig().loadConfiguration()), numProducers(num_producer), numProcessors(num_processors), numMessages(num_messages)
         {
             invalidCountPromises.reserve(numProcessors);
             invlaidCountFutures.reserve(numProcessors);
