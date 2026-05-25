@@ -21,13 +21,22 @@ namespace telementary
             try
             {
                 databaseStore.addMessage(msg);
-                memoryStore.addMessage(msg);
             }
             catch(const std::exception& e)
             {
                 invalidCount++;
-                logger.logError(e.what(), msg);
+                logger.logError(std::string("Database insert failed"), msg);
             }
+
+            try
+            {
+                memoryStore.addMessage(msg);
+            }
+            catch(const std::exception& e)
+            {
+                logger.logError(std::string("Cache memory insert failed"), msg);
+            }
+            
         }
         invalidCountPromise.set_value(invalidCount);
     }

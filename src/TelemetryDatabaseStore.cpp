@@ -36,11 +36,6 @@ namespace telementary
 
         try
         {
-            if(!msg.isValid())
-            {
-                throw std::invalid_argument("Message is not valid, db insertion failed");
-            }
-
             pqxx::work txn(*conn);
 
             txn.exec_params(

@@ -8,14 +8,7 @@ namespace telementary
     {
         std::lock_guard<std::mutex> lock(_mutex);
 
-        if(msg.isValid())
-        {
-            msg_store.push_back(msg);
-        }
-        else
-        {
-            throw std::invalid_argument("Message is not valid");
-        }
+        msg_store.push_back(msg);
     }
 
     std::vector<TelemetryMessage> InMemoryTelemetryStore::getAll() const
