@@ -15,7 +15,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. && cmake --build .
+RUN mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && cmake --build .
 
 EXPOSE 8080
 
