@@ -2,7 +2,7 @@
 #define TELEMETRYQUEUE_H
 
 #pragma once
-#include"TelemetryMessage.h"
+#include"core/TelemetryMessage.h"
 #include<mutex>
 #include<queue>
 #include<condition_variable>

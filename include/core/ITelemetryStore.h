@@ -1,7 +1,7 @@
 #ifndef ITELEMETRYSTORE_H
 #define ITELEMETRYSTORE_H
 
-#include"TelemetryMessage.h"
+#include"core/TelemetryMessage.h"
 #include<vector>
 
 namespace telementary

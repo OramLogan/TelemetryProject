@@ -11,19 +11,19 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Library target
 add_library(telemetry_lib
-    src/TelemetryMessage.cpp
-    src/InMemoryTelemetryStore.cpp
-    src/TelemetryDatabaseStore.cpp
-    src/DatabaseConnectionPool.cpp
-    src/TelemetryAnalyzer.cpp
-    src/TelemetryQueue.cpp
-    src/TelemetryProducer.cpp
-    src/TelemetryProcessor.cpp
-    src/TelemetryPipeline.cpp
-    src/TelemetryLogger.cpp
-    src/TelemetryReportGenerator.cpp
-    src/TelemetryRoutes.cpp
-    src/dbConfiguration.cpp
+    src/core/TelemetryMessage.cpp
+    src/storage/InMemoryTelemetryStore.cpp
+    src/storage/TelemetryDatabaseStore.cpp
+    src/storage/DatabaseConnectionPool.cpp
+    src/analysis/TelemetryAnalyzer.cpp
+    src/pipeline/TelemetryQueue.cpp
+    src/pipeline/TelemetryProducer.cpp
+    src/pipeline/TelemetryProcessor.cpp
+    src/pipeline/TelemetryPipeline.cpp
+    src/logger/TelemetryLogger.cpp
+    src/analysis/TelemetryReportGenerator.cpp
+    src/api/TelemetryRoutes.cpp
+    src/config/dbConfiguration.cpp
 )
 
 target_include_directories(telemetry_lib

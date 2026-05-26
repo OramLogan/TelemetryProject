@@ -1,4 +1,4 @@
-#include"dbConfiguration.h"
+#include"config/dbConfiguration.h"
 #include<stdexcept>
 
 namespace

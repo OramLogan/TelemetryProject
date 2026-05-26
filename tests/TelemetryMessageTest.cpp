@@ -1,5 +1,5 @@
 #include<gtest/gtest.h>
-#include"TelemetryMessage.h"
+#include"core/TelemetryMessage.h"
 
 using namespace telementary;
 

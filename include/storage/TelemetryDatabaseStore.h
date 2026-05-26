@@ -1,8 +1,8 @@
 #ifndef TELEMETRYDATABASESTORE_H
 #define TELEMETRYDATABASESTORE_H
 
-#include"ITelemetryStore.h"
-#include"DatabaseConnectionPool.h"
+#include"core/ITelemetryStore.h"
+#include"storage/DatabaseConnectionPool.h"
 #include<string>
 #include<vector>
 #include<pqxx/pqxx>

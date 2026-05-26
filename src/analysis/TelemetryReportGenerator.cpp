@@ -1,4 +1,4 @@
-#include"TelemetryReportGenerator.h"
+#include"analysis/TelemetryReportGenerator.h"
 #include<future>
 
 namespace telementary

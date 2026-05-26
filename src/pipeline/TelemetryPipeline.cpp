@@ -1,5 +1,5 @@
-#include"TelemetryPipeline.h"
-#include"dbConfiguration.h"
+#include"pipeline/TelemetryPipeline.h"
+#include"config/dbConfiguration.h"
 
 namespace telementary
 {
