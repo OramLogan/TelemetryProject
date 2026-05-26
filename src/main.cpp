@@ -6,9 +6,7 @@
 #include"logger/TelemetryLogger.h"
 #include"api/TelemetryRoutes.h"
 #include<iostream>
-#include<thread>
 #include<vector>
-#include<future>
 
 #include<crow.h>
 
