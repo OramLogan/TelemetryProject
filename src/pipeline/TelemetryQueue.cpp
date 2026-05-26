@@ -1,4 +1,4 @@
-#include"TelemetryQueue.h"
+#include"pipeline/TelemetryQueue.h"
 
 namespace telementary
 {

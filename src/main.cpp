@@ -1,19 +1,16 @@
-#include"TelemetryMessage.h"
-#include"InMemoryTelemetryStore.h"
-#include"TelemetryAnalyzer.h"
-#include"TelemetryQueue.h"
-#include"TelemetryProcessor.h"
-#include"TelemetryProducer.h"
-#include"TelemetryPipeline.h"
-#include"TelemetryReportGenerator.h"
-#include"TelemetryRoutes.h"
-#include"TelemetryLogger.h"
+#include"core/TelemetryMessage.h"
+#include"storage/InMemoryTelemetryStore.h"
+#include"analysis/TelemetryAnalyzer.h"
+#include"pipeline/TelemetryPipeline.h"
+#include"analysis/TelemetryReportGenerator.h"
+#include"logger/TelemetryLogger.h"
+#include"api/TelemetryRoutes.h"
 #include<iostream>
 #include<thread>
 #include<vector>
 #include<future>
 
-#include"crow.h"
+#include<crow.h>
 
 
 
