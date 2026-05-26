@@ -15,7 +15,9 @@ WORKDIR /app
 
 COPY . .
 
-RUN mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && cmake --build .
+RUN mkdir -p build && cd build && \
+    cmake -DCMAKE_BUILD_TYPE=Release .. && \
+    cmake --build . --parallel 1
 
 EXPOSE 8080
 
