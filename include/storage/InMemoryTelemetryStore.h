@@ -1,7 +1,7 @@
 #ifndef INMEMORYTELEMETRYSTORE_H
 #define INMEMORYTELEMETRYSTORE_H
 
-#include"ITelemetryStore.h"
+#include"core/ITelemetryStore.h"
 #include<cstddef>
 #include<mutex>
 

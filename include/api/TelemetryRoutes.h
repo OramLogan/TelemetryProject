@@ -1,10 +1,10 @@
 #ifndef TELEMETRYROUTES_H
 #define TELEMETRYROUTES_H
 
-#include"TelemetryPipeline.h"
-#include"TelemetryAnalyzer.h"
-#include"TelemetryReportGenerator.h"
-#include"crow.h"
+#include"pipeline/TelemetryPipeline.h"
+#include"analysis/TelemetryAnalyzer.h"
+#include"analysis/TelemetryReportGenerator.h"
+#include<crow.h>
 
 namespace telementary
 {

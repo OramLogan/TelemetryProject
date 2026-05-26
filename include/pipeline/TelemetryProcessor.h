@@ -1,9 +1,9 @@
 #ifndef TELEMETRYPROCESSOR_H
 #define TELEMETRYPROCESSOR_H
 
-#include"ITelemetryStore.h"
-#include"TelemetryQueue.h"
-#include"TelemetryLogger.h"
+#include"core/ITelemetryStore.h"
+#include"pipeline/TelemetryQueue.h"
+#include"logger/TelemetryLogger.h"
 #include<future>
 
 namespace telementary

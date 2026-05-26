@@ -1,12 +1,12 @@
 #ifndef TELEMETRYPIPELINE_H
 #define TELEMETRYPIPELINE_H
 
-#include"TelemetryQueue.h"
-#include"InMemoryTelemetryStore.h"
-#include"TelemetryDatabaseStore.h"
-#include"TelemetryProcessor.h"
-#include"TelemetryProducer.h"
-#include"TelemetryLogger.h"
+#include"pipeline/TelemetryQueue.h"
+#include"storage/InMemoryTelemetryStore.h"
+#include"storage/TelemetryDatabaseStore.h"
+#include"pipeline/TelemetryProcessor.h"
+#include"pipeline/TelemetryProducer.h"
+#include"logger/TelemetryLogger.h"
 #include<thread>
 
 namespace telementary

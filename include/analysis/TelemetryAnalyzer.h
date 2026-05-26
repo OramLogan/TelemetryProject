@@ -1,7 +1,7 @@
 #ifndef TELEMETRYANALYZER_H
 #define TELEMETRYANALYZER_H
 
-#include"ITelemetryStore.h"
+#include"core/ITelemetryStore.h"
 
 #include<vector>
 #include<string>

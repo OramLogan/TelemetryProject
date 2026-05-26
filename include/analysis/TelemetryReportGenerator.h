@@ -1,7 +1,7 @@
 #ifndef TELEMETRYREPORTGENERATOR_H
 #define TELEMETRYREPORTGENERATOR_H
 
-#include"TelemetryAnalyzer.h"
+#include"analysis/TelemetryAnalyzer.h"
 
 namespace telementary
 {

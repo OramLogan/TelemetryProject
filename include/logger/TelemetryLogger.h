@@ -5,7 +5,7 @@
 #include<sstream>
 #include<mutex>
 #include<string>
-#include"TelemetryMessage.h"
+#include"core/TelemetryMessage.h"
 
 namespace telementary
 {

@@ -1,7 +1,7 @@
 #ifndef TELEMETRYPRODUCER_H
 #define TELEMETRYPRODUCER_H
 
-#include"TelemetryQueue.h"
+#include"pipeline/TelemetryQueue.h"
 
 namespace telementary
 {
