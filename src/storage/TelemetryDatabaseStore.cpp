@@ -80,6 +80,7 @@ namespace telementary
             }
 
             txn.commit();
+            connection.release(std::move(conn));
             return messages;
         }
         catch(const std::exception& e)
@@ -87,8 +88,6 @@ namespace telementary
             connection.release(std::move(conn));
             throw;
         }
-
-        connection.release(std::move(conn));
     }
 
     std::size_t TelemetryDatabaseStore::size() const
@@ -107,6 +106,7 @@ namespace telementary
             std::size_t size = result[0][0].as<std::size_t>();
 
             txn.commit();
+            connection.release(std::move(conn));
             return size;
         }
         catch(const std::exception& e)
@@ -114,7 +114,5 @@ namespace telementary
             connection.release(std::move(conn));
             throw;
         }
-
-        connection.release(std::move(conn));
     }
 }
