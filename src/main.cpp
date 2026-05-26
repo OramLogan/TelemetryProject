@@ -41,6 +41,7 @@ int main()
     }
     catch(const std::exception& e)
     {
+        std::cerr << "Application startup failed: " << e.what() << std::endl;
         appLogger.logError(std::string("Startup error --> ") + e.what());
         return 1;
     }
